@@ -3,6 +3,9 @@
 var NUMBER_OF_MOCKS = 8;
 var mocks = [];
 var map = document.querySelector('.map');
+var mapPin = document.querySelector('#pin').content.querySelector('.map__pin');
+var MAP_PIN_HEIGHT = 70;
+var MAP_PIN_WIDTH = 50;
 
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -25,7 +28,7 @@ var baseMock = {
     'Вигвам'
   ],
   X: {
-    MIN: 0,
+    MIN: 30,
     MAX: 1150
   },
   Y: {
@@ -72,7 +75,7 @@ var baseMock = {
 
   getMockAvatar: function () {
     return {
-      avatar: 'img/avatars/user0' + this.avatarCount++ + '.png'
+      avatar: 'img/avatars/user0' + ++this.avatarCount + '.png'
     };
   },
 
@@ -111,9 +114,28 @@ var createMocks = function (number) {
   }
 };
 
+var createNewPin = function (mock) {
+  var newPin = mapPin.cloneNode(true);
+  var newPinImg = newPin.querySelector('img');
+  newPin.style.top = mock.location.y - MAP_PIN_HEIGHT + 'px';
+  newPin.style.left = mock.location.x - MAP_PIN_WIDTH / 2 + 'px';
+  newPinImg.src = mock.author.avatar;
+  newPinImg.alt = mock.offer.title;
+  return newPin;
+};
+
+var showPins = function () {
+  var fragment = document.createDocumentFragment();
+  mocks.forEach(function (mock) {
+    fragment.appendChild(createNewPin(mock));
+  });
+  map.querySelector('.map__pins').appendChild(fragment);
+};
+
 var init = function () {
   createMocks(NUMBER_OF_MOCKS);
   map.classList.remove('map--faded');
+  showPins();
 };
 
 init();
