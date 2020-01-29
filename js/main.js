@@ -150,6 +150,5 @@ var showPins = function (mocks) {
 };
 
 var mocks = createMocks(NUMBER_OF_MOCKS);
-console.log(mocks);
 map.classList.remove('map--faded');
 showPins(mocks);
