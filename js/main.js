@@ -1,18 +1,33 @@
 'use strict';
 
 var NUMBER_OF_MOCKS = 8;
-var mocks = [];
-var map = document.querySelector('.map');
-var mapPin = document.querySelector('#pin').content.querySelector('.map__pin');
 var MAP_PIN_HEIGHT = 70;
 var MAP_PIN_WIDTH = 50;
+var map = document.querySelector('.map');
+var mapPin = document.querySelector('#pin').content.querySelector('.map__pin');
 
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+var getRandomElementOfArray = function (array) {
+  return array[getRandomNumber(0, array.length - 1)];
+};
+
+var shuffleArray = function (array) {
+  var j;
+  var temp;
+  for (var i = array.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = array[j];
+    array[j] = array[i];
+    array[i] = temp;
+  }
+  return array;
+};
+
 var getRandomLengthArray = function (array) {
-  return array.concat().splice(getRandomNumber(0, array.length - 1, getRandomNumber(0, array.length - 1)));
+  return shuffleArray(array).slice(getRandomNumber(0, array.length - 1));
 };
 
 var baseMock = {
@@ -85,14 +100,14 @@ var baseMock = {
       y: getRandomNumber(this.Y.MIN, this.Y.MAX)
     };
     return {
-      title: this.TITLES[getRandomNumber(0, this.TITLES.length - 1)],
+      title: getRandomElementOfArray(this.TITLES),
       address: this.location.x + ', ' + this.location.y,
       price: getRandomNumber(this.PRICE.MIN, this.PRICE.MAX),
-      type: this.TYPES[getRandomNumber(0, this.TYPES.length - 1)],
+      type: getRandomElementOfArray(this.TYPES),
       rooms: getRandomNumber(this.ROOMS.MIN, this.ROOMS.MAX),
       guests: getRandomNumber(this.GUESTS.MIN, this.GUESTS.MAX),
-      checkIn: this.CHECK_TIMES[getRandomNumber(0, this.CHECK_TIMES.length - 1)],
-      checkOut: this.CHECK_TIMES[getRandomNumber(0, this.CHECK_TIMES.length - 1)],
+      checkIn: getRandomElementOfArray(this.CHECK_TIMES),
+      checkOut: getRandomElementOfArray(this.CHECK_TIMES),
       features: getRandomLengthArray(this.FEATURES),
       description: this.DESCRIPTION,
       photos: getRandomLengthArray(this.PHOTOS)
@@ -109,9 +124,11 @@ var baseMock = {
 };
 
 var createMocks = function (number) {
+  var mocksArray = [];
   for (var i = 0; i < number; i++) {
-    mocks.push(baseMock.createNewMock());
+    mocksArray.push(baseMock.createNewMock());
   }
+  return mocksArray;
 };
 
 var createNewPin = function (mock) {
@@ -124,7 +141,7 @@ var createNewPin = function (mock) {
   return newPin;
 };
 
-var showPins = function () {
+var showPins = function (mocks) {
   var fragment = document.createDocumentFragment();
   mocks.forEach(function (mock) {
     fragment.appendChild(createNewPin(mock));
@@ -132,10 +149,7 @@ var showPins = function () {
   map.querySelector('.map__pins').appendChild(fragment);
 };
 
-var init = function () {
-  createMocks(NUMBER_OF_MOCKS);
-  map.classList.remove('map--faded');
-  showPins();
-};
-
-init();
+var mocks = createMocks(NUMBER_OF_MOCKS);
+console.log(mocks);
+map.classList.remove('map--faded');
+showPins(mocks);
