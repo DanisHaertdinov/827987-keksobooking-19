@@ -43,8 +43,8 @@ var baseMock = {
     'Вигвам'
   ],
   X: {
-    MIN: 30,
-    MAX: 1150
+    MIN: 0,
+    MAX: 1200
   },
   Y: {
     MIN: 130,
@@ -149,6 +149,10 @@ var showPins = function (mocks) {
   map.querySelector('.map__pins').appendChild(fragment);
 };
 
+var activateMap = function () {
+  map.classList.remove('map--faded');
+};
+
 var mocks = createMocks(NUMBER_OF_MOCKS);
-map.classList.remove('map--faded');
+activateMap();
 showPins(mocks);
