@@ -5,6 +5,7 @@ var MAP_PIN_HEIGHT = 70;
 var MAP_PIN_WIDTH = 50;
 var map = document.querySelector('.map');
 var mapPin = document.querySelector('#pin').content.querySelector('.map__pin');
+var mapFilters = map.querySelector('.map__filters-container');
 
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -153,6 +154,52 @@ var activateMap = function () {
   map.classList.remove('map--faded');
 };
 
+var translateOfferType = function (offerType) {
+  var translatedOfferType;
+  switch (offerType) {
+    case 'flat':
+      translatedOfferType = 'Квартира';
+      break;
+    case 'bungalo':
+      translatedOfferType = 'Бунгало';
+      break;
+    case 'house':
+      translatedOfferType = 'Дом';
+      break;
+    case 'palace':
+      translatedOfferType = 'Дворец';
+      break;
+  }
+  return translatedOfferType;
+};
+
+var showMapCard = function (offerData) {
+  var mapCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+  var mapCard = mapCardTemplate.cloneNode(true);
+  mapCard.querySelector('.popup__title').textContent = offerData.offer.title;
+  mapCard.querySelector('.popup__text--address').textContent = offerData.offer.address;
+  mapCard.querySelector('.popup__text--price').textContent = offerData.offer.price + '₽/ночь';
+  mapCard.querySelector('.popup__type').textContent = translateOfferType(offerData.offer.type);
+  mapCard.querySelector('.popup__text--capacity').textContent = offerData.offer.rooms + ' комнаты для ' + offerData.offer.guests + ' гостей';
+  mapCard.querySelector('.popup__text--time').textContent = 'Заезд после ' + offerData.offer.checkIn + ', выезд до ' + offerData.offer.checkOut;
+  mapCard.querySelector('.popup__features').innerHTML = '';
+  offerData.offer.features.forEach(function (element) {
+    var feature = mapCardTemplate.querySelector('.popup__feature--' + element).cloneNode(true);
+    mapCard.querySelector('.popup__features').appendChild(feature);
+  });
+  mapCard.querySelector('.popup__description').textContent = offerData.offer.description;
+  mapCard.querySelector('.popup__photos').innerHTML = '';
+  offerData.offer.photos.forEach(function (element) {
+    var photo = mapCardTemplate.querySelector('.popup__photo').cloneNode(true);
+    photo.src = element;
+    mapCard.querySelector('.popup__photos').appendChild(photo);
+  });
+  mapCard.querySelector('.popup__avatar').src = offerData.author.avatar;
+
+  map.insertBefore(mapCard, mapFilters);
+};
+
 var mocks = createMocks(NUMBER_OF_MOCKS);
 activateMap();
 showPins(mocks);
+showMapCard(mocks[0]);
