@@ -159,6 +159,32 @@ var activateMap = function () {
   map.classList.remove('map--faded');
 };
 
+var flexNormalize = function (number, forms) {
+  number = Number(number);
+  if (number % 100 === 11) {
+    return forms[0];
+  }
+  var remainder = number % 10;
+  switch (true) {
+    case remainder === 0 || remainder > 4:
+      return forms[0];
+    case remainder === 1:
+      return forms[1];
+    default:
+      return forms[2];
+  }
+};
+
+var roomsFlexNormalize = function (number) {
+  var forms = ['комнат', 'комната', 'комнаты'];
+  return flexNormalize(number, forms);
+};
+
+var guestsFlexNormalize = function (number) {
+  var forms = ['гостей', 'гостя', 'гостей'];
+  return flexNormalize(number, forms);
+};
+
 var offerTypeListMap = {
   'flat': 'Квартира',
 
@@ -183,12 +209,14 @@ var createMapCardPhoto = function (photoSource) {
 };
 
 var showMapCard = function (offerData) {
+  var rooms = offerData.offer.rooms;
+  var guests = offerData.offer.guests;
   var mapCard = mapCardTemplate.cloneNode(true);
   mapCard.querySelector('.popup__title').textContent = offerData.offer.title;
   mapCard.querySelector('.popup__text--address').textContent = offerData.offer.address;
   mapCard.querySelector('.popup__text--price').textContent = offerData.offer.price + '₽/ночь';
   mapCard.querySelector('.popup__type').textContent = offerTypeListMap[offerData.offer.type];
-  mapCard.querySelector('.popup__text--capacity').textContent = offerData.offer.rooms + ' комнаты для ' + offerData.offer.guests + ' гостей';
+  mapCard.querySelector('.popup__text--capacity').textContent = rooms + ' ' + roomsFlexNormalize(rooms) + ' для ' + guests + ' ' + guestsFlexNormalize(guests);
   mapCard.querySelector('.popup__text--time').textContent = 'Заезд после ' + offerData.offer.checkIn + ', выезд до ' + offerData.offer.checkOut;
   mapCard.querySelector('.popup__features').innerHTML = '';
   mapCard.querySelector('.popup__features').appendChild(collectElements(offerData.offer.features, createMapCardFeature));
