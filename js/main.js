@@ -13,6 +13,10 @@ var mapFiltersContainer = map.querySelector('.map__filters-container');
 var adFilterForm = document.querySelector('.ad-form');
 var roomsSelect = adFilterForm.querySelector('#room_number');
 var guestsSelect = adFilterForm.querySelector('#capacity');
+var typeSelect = adFilterForm.querySelector('#type');
+var timeInSelect = adFilterForm.querySelector('#timein');
+var timeOutSelect = adFilterForm.querySelector('#timeout');
+var priceInput = adFilterForm.querySelector('#price');
 var mainMapPin = map.querySelector('.map__pin--main');
 var isPageActivated = false;
 
@@ -325,6 +329,42 @@ roomsSelect.addEventListener('input', function () {
 
 guestsSelect.addEventListener('input', function () {
   checkRoomsValidity();
+});
+
+var offerPriceListMap = {
+  'flat': 1000,
+
+  'bungalo': 0,
+
+  'house': 5000,
+
+  'palace': 10000,
+
+};
+
+var changePriceInput = function (value) {
+  priceInput.min = offerPriceListMap[value];
+  priceInput.placeholder = offerPriceListMap[value];
+};
+
+typeSelect.addEventListener('input', function (evt) {
+  changePriceInput(evt.target.value);
+});
+
+var synchronizeTimeSelects = function (changedSelect) {
+  if (changedSelect === timeInSelect) {
+    timeOutSelect.value = timeInSelect.value;
+  } else {
+    timeInSelect.value = timeOutSelect.value;
+  }
+};
+
+timeInSelect.addEventListener('input', function (evt) {
+  synchronizeTimeSelects(evt.target);
+});
+
+timeOutSelect.addEventListener('input', function (evt) {
+  synchronizeTimeSelects(evt.target);
 });
 
 disablePageFormElements();
