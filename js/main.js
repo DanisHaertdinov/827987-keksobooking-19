@@ -163,11 +163,6 @@ var createMapPin = function (mock) {
   mapPin.addEventListener('click', function () {
     showMapCard(mock);
   });
-  mapPin.addEventListener('keydown', function (evt) {
-    if (evt.key === ENTER_KEY) {
-      showMapCard(mock);
-    }
-  });
   return mapPin;
 };
 
@@ -253,11 +248,6 @@ var showMapCard = function (offerData) {
   removeMapCard();
   mapCard.querySelector('.popup__close').addEventListener('click', function () {
     removeMapCard();
-  });
-  mapCard.querySelector('.popup__close').addEventListener('keydown', function (evt) {
-    if (evt.key === ENTER_KEY) {
-      removeMapCard();
-    }
   });
   document.addEventListener('keydown', mapCardEscPressHandler);
   map.insertBefore(mapCard, mapFiltersContainer);
