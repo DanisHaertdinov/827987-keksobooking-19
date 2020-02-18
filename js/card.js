@@ -82,9 +82,9 @@
   };
 
   window.card = {
-    showMapCard: showMapCard,
-    removeMapCard: removeMapCard,
-    mapCardEscPressHandler: mapCardEscPressHandler
+    show: showMapCard,
+    remove: removeMapCard,
+    escPressHandler: mapCardEscPressHandler
   };
 
 })();

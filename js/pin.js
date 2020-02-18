@@ -5,7 +5,7 @@
   var MAP_PIN_WIDTH = 50;
 
   var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-  var showMapCard = window.card.showMapCard;
+  var showMapCard = window.card.show;
 
   var createMapPin = function (pinData) {
     var mapPin = mapPinTemplate.cloneNode(true);
@@ -21,7 +21,7 @@
   };
 
   window.pin = {
-    createMapPin: createMapPin
+    create: createMapPin
   };
 
 })();

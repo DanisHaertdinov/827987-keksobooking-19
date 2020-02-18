@@ -80,8 +80,8 @@
   });
 
   window.form = {
-    activatePageFormElements: activatePageFormElements,
-    disablePageFormElements: disablePageFormElements
+    activatePageElements: activatePageFormElements,
+    disablePageElements: disablePageFormElements
   };
 
 })();

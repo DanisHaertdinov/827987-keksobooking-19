@@ -9,9 +9,9 @@ var mocks = window.data.mocks;
 var ENTER_KEY = window.util.ENTER_KEY;
 
 var collectElements = window.util.collectElements;
-var createMapPin = window.pin.createMapPin;
-var activatePageFormElements = window.form.activatePageFormElements;
-var disablePageFormElements = window.form.disablePageFormElements;
+var createMapPin = window.pin.create;
+var activatePageFormElements = window.form.activatePageElements;
+var disablePageFormElements = window.form.disablePageElements;
 
 var showPins = function (mocksData) {
   map.querySelector('.map__pins').appendChild(collectElements(mocksData, createMapPin));
