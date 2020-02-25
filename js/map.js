@@ -9,7 +9,7 @@ var map = document.querySelector('.map');
 var adFilterForm = document.querySelector('.ad-form');
 var mainMapPin = map.querySelector('.map__pin--main');
 var isPageActivated = false;
-var mocks = window.data.mocks;
+var load = window.data.load;
 var collectElements = window.util.collectElements;
 var createMapPin = window.pin.create;
 var activatePageFormElements = window.form.activatePageElements;
@@ -21,8 +21,20 @@ var mapLimits = {
   bottom: MAP_BOTTOM_COORDINATE - ACTIVE_MAIN_MAP_PIN_HEIGHT,
 };
 
-var showPins = function (mocksData) {
-  map.querySelector('.map__pins').appendChild(collectElements(mocksData, createMapPin));
+var showPins = function (pinsData) {
+  map.querySelector('.map__pins').appendChild(collectElements(pinsData, createMapPin));
+};
+
+var pinsLoadErrorHandler = function (errorMessage) {
+  var node = document.createElement('div');
+  node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+  node.style.position = 'absolute';
+  node.style.left = 0;
+  node.style.right = 0;
+  node.style.fontSize = '30px';
+
+  node.textContent = errorMessage;
+  document.body.insertAdjacentElement('afterbegin', node);
 };
 
 var setAdAddress = function () {
@@ -84,7 +96,7 @@ var activatePage = function () {
   map.classList.remove('map--faded');
   adFilterForm.classList.remove('ad-form--disabled');
   activatePageFormElements();
-  showPins(mocks);
+  load(showPins, pinsLoadErrorHandler);
   isPageActivated = true;
   mainMapPin.removeEventListener('keydown', mainMapPinEnterPressHandler);
 };
