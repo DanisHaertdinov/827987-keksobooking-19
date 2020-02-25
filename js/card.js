@@ -53,7 +53,7 @@
     mapCard.querySelector('.popup__text--price').textContent = offerData.offer.price + '₽/ночь';
     mapCard.querySelector('.popup__type').textContent = offerTypeListMap[offerData.offer.type];
     mapCard.querySelector('.popup__text--capacity').textContent = rooms + ' ' + roomsFlexNormalize(rooms) + ' для ' + guests + ' ' + guestsFlexNormalize(guests);
-    mapCard.querySelector('.popup__text--time').textContent = 'Заезд после ' + offerData.offer.checkIn + ', выезд до ' + offerData.offer.checkOut;
+    mapCard.querySelector('.popup__text--time').textContent = 'Заезд после ' + offerData.offer.checkin + ', выезд до ' + offerData.offer.checkout;
     mapCard.querySelector('.popup__features').innerHTML = '';
     mapCard.querySelector('.popup__features').appendChild(collectElements(offerData.offer.features, createMapCardFeature));
     mapCard.querySelector('.popup__description').textContent = offerData.offer.description;
