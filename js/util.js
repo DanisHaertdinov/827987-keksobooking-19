@@ -35,6 +35,15 @@
     return fragment;
   };
 
+  var removeElementsByClassName = function (className) {
+    var elements = document.querySelectorAll('.' + className);
+    if (elements.length > 0) {
+      elements.forEach(function (element) {
+        element.remove();
+      });
+    }
+  };
+
   var flexNormalize = function (number, forms) {
     number = Number(number);
     if (number % 100 === 11) {
@@ -58,6 +67,7 @@
     getRandomLengthArray: getRandomLengthArray,
     collectElements: collectElements,
     flexNormalize: flexNormalize,
+    removeElementsByClassName: removeElementsByClassName,
     ESCAPE_KEY: ESCAPE_KEY,
     ENTER_KEY: ENTER_KEY
   };

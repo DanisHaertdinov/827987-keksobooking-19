@@ -8,6 +8,7 @@
   var mapCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var flexNormalize = window.util.flexNormalize;
   var collectElements = window.util.collectElements;
+  var removeElementsByClassName = window.util.removeElementsByClassName;
 
 
   var roomsFlexNormalize = function (number) {
@@ -70,7 +71,7 @@
 
   var removeMapCard = function () {
     if (map.querySelector('.map__card')) {
-      map.querySelector('.map__card').remove();
+      removeElementsByClassName('map__card');
       document.removeEventListener('keydown', mapCardEscPressHandler);
     }
   };

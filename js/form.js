@@ -1,13 +1,13 @@
 'use strict';
 
 (function () {
-  var adFilterForm = document.querySelector('.ad-form');
-  var roomsSelect = adFilterForm.querySelector('#room_number');
-  var guestsSelect = adFilterForm.querySelector('#capacity');
-  var typeSelect = adFilterForm.querySelector('#type');
-  var timeInSelect = adFilterForm.querySelector('#timein');
-  var timeOutSelect = adFilterForm.querySelector('#timeout');
-  var priceInput = adFilterForm.querySelector('#price');
+  var adForm = document.querySelector('.ad-form');
+  var roomsSelect = adForm.querySelector('#room_number');
+  var guestsSelect = adForm.querySelector('#capacity');
+  var typeSelect = adForm.querySelector('#type');
+  var timeInSelect = adForm.querySelector('#timein');
+  var timeOutSelect = adForm.querySelector('#timeout');
+  var priceInput = adForm.querySelector('#price');
 
   var disablePageFormElements = function () {
     document.querySelectorAll('fieldset,input,select').forEach(function (element) {
