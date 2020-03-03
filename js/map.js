@@ -33,6 +33,7 @@
     bottom: MAP_BOTTOM_COORDINATE - ACTIVE_MAIN_MAP_PIN_HEIGHT,
   };
   var removeMapCard = window.card.remove;
+  var setupDragNDrop = window.dragNDrop.setupElement;
 
   var showPins = function (pinsData) {
     map.querySelector('.map__pins').appendChild(collectElements(pinsData, createMapPin));
@@ -72,42 +73,8 @@
   var mainMapPinLeftMouseDownHandler = function (evt) {
     if (evt.button === 0) {
       evt.preventDefault();
-      if (!isPageActivated) {
-        activatePage();
-      }
-      var startCoords = {
-        x: evt.clientX,
-        y: evt.clientY
-      };
-      var mainMapPinMouseMoveHandler = function (moveEvt) {
-        moveEvt.preventDefault();
-        var shift = {
-          x: startCoords.x - moveEvt.clientX,
-          y: startCoords.y - moveEvt.clientY
-        };
-        startCoords = {
-          x: moveEvt.clientX,
-          y: moveEvt.clientY
-        };
-        if (mainMapPin.offsetTop - shift.y >= mapLimits.top && mainMapPin.offsetTop - shift.y <= mapLimits.bottom) {
-          mainMapPin.style.top = (mainMapPin.offsetTop - shift.y) + 'px';
-        }
-        if (mainMapPin.offsetLeft - shift.x >= mapLimits.left && mainMapPin.offsetLeft - shift.x <= mapLimits.right) {
-          mainMapPin.style.left = (mainMapPin.offsetLeft - shift.x) + 'px';
-        }
-        setAdAddress();
-      };
-
-      var mainMapPinMouseUpHandler = function (upEvt) {
-        upEvt.preventDefault();
-        window.removeEventListener('mousemove', mainMapPinMouseMoveHandler);
-        window.removeEventListener('mouseup', mainMapPinMouseUpHandler);
-        setAdAddress();
-      };
-      window.addEventListener('mousemove', mainMapPinMouseMoveHandler);
-      window.addEventListener('mouseup', mainMapPinMouseUpHandler);
+      activatePage();
     }
-
   };
 
   var mainMapPinEnterPressHandler = function (evt) {
@@ -124,6 +91,7 @@
     get(showPins, requestErrorHandler);
     isPageActivated = true;
     mainMapPin.removeEventListener('keydown', mainMapPinEnterPressHandler);
+    mainMapPin.addEventListener('mousedown', mainMapPinLeftMouseDownHandler);
   };
 
   var deactivatePage = function () {
@@ -175,5 +143,5 @@
   });
 
   deactivatePage();
-
+  setupDragNDrop(mainMapPin, mapLimits, setAdAddress);
 })();
