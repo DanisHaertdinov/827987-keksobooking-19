@@ -60,6 +60,18 @@
     }
   };
 
+  var disableFormElements = function (form) {
+    form.querySelectorAll('fieldset,input,select').forEach(function (element) {
+      element.disabled = true;
+    });
+  };
+
+  var activateFormElements = function (form) {
+    form.querySelectorAll('fieldset,input,select').forEach(function (element) {
+      element.disabled = false;
+    });
+  };
+
   window.util = {
     getRandomNumber: getRandomNumber,
     getRandomElementOfArray: getRandomElementOfArray,
@@ -69,6 +81,8 @@
     flexNormalize: flexNormalize,
     removeElementsByClassName: removeElementsByClassName,
     ESCAPE_KEY: ESCAPE_KEY,
-    ENTER_KEY: ENTER_KEY
+    ENTER_KEY: ENTER_KEY,
+    activateFormElements: activateFormElements,
+    disableFormElements: disableFormElements
   };
 })();
