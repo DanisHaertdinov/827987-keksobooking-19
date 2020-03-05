@@ -35,6 +35,15 @@
     return fragment;
   };
 
+  var removeElementsByClassName = function (className) {
+    var elements = document.querySelectorAll('.' + className);
+    if (elements.length > 0) {
+      elements.forEach(function (element) {
+        element.remove();
+      });
+    }
+  };
+
   var flexNormalize = function (number, forms) {
     number = Number(number);
     if (number % 100 === 11) {
@@ -51,6 +60,18 @@
     }
   };
 
+  var disableFormElements = function (form) {
+    form.querySelectorAll('fieldset,input,select').forEach(function (element) {
+      element.disabled = true;
+    });
+  };
+
+  var activateFormElements = function (form) {
+    form.querySelectorAll('fieldset,input,select').forEach(function (element) {
+      element.disabled = false;
+    });
+  };
+
   window.util = {
     getRandomNumber: getRandomNumber,
     getRandomElementOfArray: getRandomElementOfArray,
@@ -58,7 +79,10 @@
     getRandomLengthArray: getRandomLengthArray,
     collectElements: collectElements,
     flexNormalize: flexNormalize,
+    removeElementsByClassName: removeElementsByClassName,
     ESCAPE_KEY: ESCAPE_KEY,
-    ENTER_KEY: ENTER_KEY
+    ENTER_KEY: ENTER_KEY,
+    activateFormElements: activateFormElements,
+    disableFormElements: disableFormElements
   };
 })();
