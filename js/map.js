@@ -15,10 +15,6 @@
   var filterForm = document.querySelector('.map__filters');
   var mainMapPin = map.querySelector('.map__pin--main');
   var isPageActivated = false;
-  var get = window.data.get;
-  var collectElements = window.util.collectElements;
-  var removeElementsByClassName = window.util.removeElementsByClassName;
-  var createMapPin = window.pin.create;
   var activateFormElements = window.util.activateFormElements;
   var disableFormElements = window.util.disableFormElements;
   var mapLimits = {
@@ -29,22 +25,8 @@
   };
   var removeMapCard = window.card.remove;
   var setupDragNDrop = window.dragNDrop.setupElement;
-
-  var showPins = function (pinsData) {
-    map.querySelector('.map__pins').appendChild(collectElements(pinsData, createMapPin));
-  };
-
-  var pinsLoadErrorHandler = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
+  var renderPins = window.pins.render;
+  var removePins = window.pins.remove;
 
   var setAdAddress = function () {
     var addressInput = adForm.querySelector('#address');
@@ -70,15 +52,11 @@
   var activatePage = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
+    renderPins();
     activateFormElements(adForm);
-    get(function (response) {
-      showPins(response);
-      activateFormElements(filterForm);
-
-    }, pinsLoadErrorHandler);
     isPageActivated = true;
     mainMapPin.removeEventListener('keydown', mainMapPinEnterPressHandler);
-    mainMapPin.addEventListener('mousedown', mainMapPinLeftMouseDownHandler);
+    mainMapPin.removeEventListener('mousedown', mainMapPinLeftMouseDownHandler);
   };
 
   var deactivatePage = function () {
@@ -92,7 +70,7 @@
     adForm.reset();
     filterForm.reset();
     removeMapCard();
-    removeElementsByClassName('map__pin:not(.map__pin--main)');
+    removePins();
     mainMapPin.style.left = INACTIVE_MAIN_MAP_PIN_STYLES.LEFT;
     mainMapPin.style.top = INACTIVE_MAIN_MAP_PIN_STYLES.TOP;
     setAdAddress();
@@ -103,6 +81,6 @@
 
   window.map = {
     activatePage: activatePage,
-    deactivatePage: deactivatePage
+    deactivatePage: deactivatePage,
   };
 })();

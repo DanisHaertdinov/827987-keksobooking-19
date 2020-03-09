@@ -2,10 +2,10 @@
 
 (function () {
   var URL = 'https://js.dump.academy/keksobooking';
+  var TIMEOUT_IN_MS = 10000;
   var StatusCode = {
     OK: 200
   };
-  var TIMEOUT_IN_MS = 10000;
 
   var prepareRequest = function (successHandler, errorHandler) {
     var xhr = new XMLHttpRequest();
