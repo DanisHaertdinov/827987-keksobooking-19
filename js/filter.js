@@ -4,6 +4,7 @@
   var housingTypeSelect = document.querySelector('#housing-type');
   var housingPriceSelect = document.querySelector('#housing-price');
   var housingRoomsSelect = document.querySelector('#housing-rooms');
+  var housingGuestsSelect = document.querySelector('#housing-guests');
   var updatePins = window.pins.update;
   var Prices = {
     LOW: 10000,
@@ -31,10 +32,15 @@
     return housingRoomsSelect.value === 'any' || pinData.offer.rooms === Number(housingRoomsSelect.value);
   };
 
+  var filterByGuests = function (pinData) {
+    return housingGuestsSelect.value === 'any' || pinData.offer.guests === Number(housingGuestsSelect.value);
+  };
+
   var filterPins = function (pins) {
     return pins.filter(filterByType)
       .filter(filterByPrice)
-      .filter(filterByRooms);
+      .filter(filterByRooms)
+      .filter(filterByGuests);
   };
 
   housingTypeSelect.addEventListener('change', function () {
@@ -46,6 +52,10 @@
   });
 
   housingRoomsSelect.addEventListener('change', function () {
+    updatePins(filterPins);
+  });
+
+  housingGuestsSelect.addEventListener('change', function () {
     updatePins(filterPins);
   });
 
