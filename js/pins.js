@@ -9,6 +9,7 @@
   var filterForm = document.querySelector('.map__filters');
   var activateFormElements = window.util.activateFormElements;
   var removeElementsByClassName = window.util.removeElementsByClassName;
+  var removeMapCard = window.card.remove;
   var offers = [];
 
   var showPins = function (pinsData) {
@@ -43,6 +44,7 @@
 
   var updatePins = function (callback) {
     var updatedPins = callback(offers);
+    removeMapCard();
     removePins();
     showPins(updatedPins);
   };
