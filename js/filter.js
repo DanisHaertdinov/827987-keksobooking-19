@@ -3,6 +3,7 @@
 (function () {
   var housingTypeSelect = document.querySelector('#housing-type');
   var housingPriceSelect = document.querySelector('#housing-price');
+  var housingRoomsSelect = document.querySelector('#housing-rooms');
   var updatePins = window.pins.update;
   var Prices = {
     LOW: 10000,
@@ -26,8 +27,14 @@
     }
   };
 
+  var filterByRooms = function (pinData) {
+    return housingRoomsSelect.value === 'any' || pinData.offer.rooms === Number(housingRoomsSelect.value);
+  };
+
   var filterPins = function (pins) {
-    return pins.filter(filterByType).filter(filterByPrice);
+    return pins.filter(filterByType)
+      .filter(filterByPrice)
+      .filter(filterByRooms);
   };
 
   housingTypeSelect.addEventListener('change', function () {
@@ -37,5 +44,10 @@
   housingPriceSelect.addEventListener('change', function () {
     updatePins(filterPins);
   });
+
+  housingRoomsSelect.addEventListener('change', function () {
+    updatePins(filterPins);
+  });
+
 
 })();
