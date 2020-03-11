@@ -3,6 +3,7 @@
 (function () {
   var ENTER_KEY = 'Enter';
   var ESCAPE_KEY = 'Escape';
+  var DEBOUNCE_INTERVAL = 500;
 
   var getRandomNumber = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -72,6 +73,20 @@
     });
   };
 
+  var debounce = function (callback) {
+    var lastTimeout = null;
+
+    return function () {
+      var parameters = arguments;
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(function () {
+        callback.apply(null, parameters);
+      }, DEBOUNCE_INTERVAL);
+    };
+  };
+
   window.util = {
     getRandomNumber: getRandomNumber,
     getRandomElementOfArray: getRandomElementOfArray,
@@ -83,6 +98,7 @@
     ESCAPE_KEY: ESCAPE_KEY,
     ENTER_KEY: ENTER_KEY,
     activateFormElements: activateFormElements,
-    disableFormElements: disableFormElements
+    disableFormElements: disableFormElements,
+    debounce: debounce
   };
 })();
