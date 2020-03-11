@@ -3,7 +3,7 @@
 (function () {
   var ENTER_KEY = 'Enter';
   var ESCAPE_KEY = 'Escape';
-  var DEBOUNCE_INTERVAL = 1500;
+  var DEBOUNCE_INTERVAL = 500;
 
   var getRandomNumber = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;

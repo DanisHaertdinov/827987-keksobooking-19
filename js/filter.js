@@ -21,6 +21,10 @@
     });
   };
 
+  var filterByOffer = function (pinData) {
+    return pinData.hasOwnProperty('offer');
+  };
+
   var filterByType = function (pinData) {
     return housingTypeSelect.value === 'any' || pinData.offer.type === housingTypeSelect.value;
   };
@@ -53,7 +57,8 @@
   };
 
   var filterPins = function (pins) {
-    return pins.filter(filterByType)
+    return pins.filter(filterByOffer)
+      .filter(filterByType)
       .filter(filterByPrice)
       .filter(filterByRooms)
       .filter(filterByGuests)
