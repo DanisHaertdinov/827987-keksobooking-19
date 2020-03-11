@@ -12,6 +12,7 @@
   var housingFeaturesCheckboxes = document.querySelectorAll('#housing-features .map__checkbox');
   var checkedFeatures = [];
   var updatePins = window.pins.update;
+  var debounce = window.util.debounce;
 
   var updateCheckedFeatures = function () {
     checkedFeatures = document.querySelectorAll('#housing-features .map__checkbox:checked');
@@ -59,27 +60,27 @@
       .filter(filterByFeatures);
   };
 
-  housingTypeSelect.addEventListener('change', function () {
+  housingTypeSelect.addEventListener('change', debounce(function () {
     updatePins(filterPins);
-  });
+  }));
 
-  housingPriceSelect.addEventListener('change', function () {
+  housingPriceSelect.addEventListener('change', debounce(function () {
     updatePins(filterPins);
-  });
+  }));
 
-  housingRoomsSelect.addEventListener('change', function () {
+  housingRoomsSelect.addEventListener('change', debounce(function () {
     updatePins(filterPins);
-  });
+  }));
 
-  housingGuestsSelect.addEventListener('change', function () {
+  housingGuestsSelect.addEventListener('change', debounce(function () {
     updatePins(filterPins);
-  });
+  }));
 
   housingFeaturesCheckboxes.forEach(function (element) {
-    element.addEventListener('click', function () {
+    element.addEventListener('click', debounce(function () {
       updateCheckedFeatures();
       updatePins(filterPins);
-    });
+    }));
   });
 
 
