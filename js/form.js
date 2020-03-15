@@ -14,6 +14,8 @@
   var deactivatePage = window.map.deactivatePage;
   var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
   var successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+  var avatarChooser = document.querySelector('#avatar');
+  var userAvatar = document.querySelector('.ad-form-header__preview img');
 
   var checkRoomsValidity = function () {
     var rooms = Number(roomsSelect.value);
@@ -127,6 +129,20 @@
   adFormReset.addEventListener('click', function (evt) {
     evt.preventDefault();
     deactivatePage();
+  });
+
+  var updateAvatar = function (imageFile) {
+    var reader = new FileReader();
+
+    reader.addEventListener('load', function () {
+      userAvatar.src = reader.result;
+    });
+
+    reader.readAsDataURL(imageFile);
+  };
+
+  avatarChooser.addEventListener('change', function () {
+    updateAvatar(avatarChooser.files[0]);
   });
 
 })();
