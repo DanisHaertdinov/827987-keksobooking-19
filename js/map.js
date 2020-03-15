@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+
+  var resetUserImages = window.images.reset;
+
   var ACTIVE_MAIN_MAP_PIN_HEIGHT = 84;
   var ENTER_KEY = window.util.ENTER_KEY;
   var MAP_TOP_COORDINATE = 130;
@@ -69,6 +72,7 @@
     mainMapPin.addEventListener('mousedown', mainMapPinLeftMouseDownHandler);
     adForm.reset();
     filterForm.reset();
+    resetUserImages();
     removeMapCard();
     removePins();
     mainMapPin.style.left = INACTIVE_MAIN_MAP_PIN_STYLES.LEFT;
