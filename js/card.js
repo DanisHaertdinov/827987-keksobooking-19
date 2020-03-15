@@ -84,8 +84,7 @@
 
   window.card = {
     show: showMapCard,
-    remove: removeMapCard,
-    escPressHandler: mapCardEscPressHandler
+    remove: removeMapCard
   };
 
 })();
