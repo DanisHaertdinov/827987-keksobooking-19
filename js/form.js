@@ -26,7 +26,7 @@
     } else if (!guests && rooms !== 100) {
       validateText = 'Сто комнат не для гостей!';
     }
-    roomsSelect.setCustomValidity(validateText);
+    guestsSelect.setCustomValidity(validateText);
   };
 
   var offerPriceListMap = {
