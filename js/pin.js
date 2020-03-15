@@ -1,12 +1,13 @@
 'use strict';
 
 (function () {
+  var showMapCard = window.card.show;
+
   var ESCAPE_KEY = window.util.ESCAPE_KEY;
   var MAP_PIN_HEIGHT = 70;
   var MAP_PIN_WIDTH = 50;
 
   var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-  var showMapCard = window.card.show;
   var activePin;
 
   var createMapPin = function (pinData) {

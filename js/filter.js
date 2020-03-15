@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var updatePins = window.pins.update;
+  var debounce = window.util.debounce;
+
   var Prices = {
     LOW: 10000,
     HIGH: 50000
@@ -11,8 +14,6 @@
   var housingGuestsSelect = document.querySelector('#housing-guests');
   var housingFeaturesCheckboxes = document.querySelectorAll('#housing-features .map__checkbox');
   var checkedFeatures = [];
-  var updatePins = window.pins.update;
-  var debounce = window.util.debounce;
 
   var updateCheckedFeatures = function () {
     checkedFeatures = document.querySelectorAll('#housing-features .map__checkbox:checked');

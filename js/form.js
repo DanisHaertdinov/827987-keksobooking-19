@@ -1,7 +1,11 @@
 'use strict';
 
 (function () {
+  var post = window.data.post;
+  var deactivatePage = window.map.deactivatePage;
+
   var ESCAPE_KEY = window.util.ESCAPE_KEY;
+
   var adForm = document.querySelector('.ad-form');
   var adFormReset = document.querySelector('.ad-form__reset');
   var roomsSelect = adForm.querySelector('#room_number');
@@ -10,8 +14,6 @@
   var timeInSelect = adForm.querySelector('#timein');
   var timeOutSelect = adForm.querySelector('#timeout');
   var priceInput = adForm.querySelector('#price');
-  var post = window.data.post;
-  var deactivatePage = window.map.deactivatePage;
   var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
   var successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
 

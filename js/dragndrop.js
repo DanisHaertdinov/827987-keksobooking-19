@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var setupElement = function (element, getLimits, callback) {
     element.addEventListener('mousedown', function (evt) {
       if (evt.button === 0) {

@@ -1,15 +1,16 @@
 'use strict';
 
 (function () {
-  var PINS_TO_SHOW = 5;
-  var loadPins = window.data.get;
-  var collectElements = window.util.collectElements;
-  var createMapPin = window.pin.create;
-  var map = document.querySelector('.map');
-  var filterForm = document.querySelector('.map__filters');
   var activateFormElements = window.util.activateFormElements;
   var removeElementsByClassName = window.util.removeElementsByClassName;
+  var collectElements = window.util.collectElements;
   var removeMapCard = window.card.remove;
+  var loadPins = window.data.get;
+  var createMapPin = window.pin.create;
+
+  var PINS_TO_SHOW = 5;
+  var map = document.querySelector('.map');
+  var filterForm = document.querySelector('.map__filters');
   var offers = [];
 
   var showPins = function (pinsData) {

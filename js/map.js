@@ -1,8 +1,15 @@
 'use strict';
 
 (function () {
-  var ACTIVE_MAIN_MAP_PIN_HEIGHT = 84;
+  var activateFormElements = window.util.activateFormElements;
+  var disableFormElements = window.util.disableFormElements;
+  var removeMapCard = window.card.remove;
+  var setupDragNDrop = window.dragNDrop.setupElement;
+  var renderPins = window.pins.render;
+  var removePins = window.pins.remove;
+
   var ENTER_KEY = window.util.ENTER_KEY;
+  var ACTIVE_MAIN_MAP_PIN_HEIGHT = 84;
   var MAP_TOP_COORDINATE = 130;
   var MAP_BOTTOM_COORDINATE = 630;
   var MAP_LEFT_COORDINATE = 0;
@@ -15,12 +22,6 @@
   var filterForm = document.querySelector('.map__filters');
   var mainMapPin = map.querySelector('.map__pin--main');
   var isPageActivated = false;
-  var activateFormElements = window.util.activateFormElements;
-  var disableFormElements = window.util.disableFormElements;
-  var removeMapCard = window.card.remove;
-  var setupDragNDrop = window.dragNDrop.setupElement;
-  var renderPins = window.pins.render;
-  var removePins = window.pins.remove;
 
   var getMapLimits = function () {
     return {

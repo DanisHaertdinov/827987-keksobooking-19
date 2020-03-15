@@ -1,15 +1,15 @@
 'use strict';
 
 (function () {
+  var flexNormalize = window.util.flexNormalize;
+  var collectElements = window.util.collectElements;
+  var removeElementsByClassName = window.util.removeElementsByClassName;
+
   var ESCAPE_KEY = window.util.ESCAPE_KEY;
 
   var map = document.querySelector('.map');
   var mapFiltersContainer = map.querySelector('.map__filters-container');
   var mapCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
-  var flexNormalize = window.util.flexNormalize;
-  var collectElements = window.util.collectElements;
-  var removeElementsByClassName = window.util.removeElementsByClassName;
-
 
   var roomsFlexNormalize = function (number) {
     var forms = ['комнат', 'комната', 'комнаты'];
