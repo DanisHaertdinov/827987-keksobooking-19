@@ -2,10 +2,11 @@
 
 (function () {
 
-  var setupElement = function (element, limits, callback) {
+  var setupElement = function (element, getLimits, callback) {
     element.addEventListener('mousedown', function (evt) {
       if (evt.button === 0) {
         evt.preventDefault();
+        var limits = getLimits();
         var startCoords = {
           x: evt.clientX,
           y: evt.clientY

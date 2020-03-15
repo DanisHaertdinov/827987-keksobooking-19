@@ -1,9 +1,6 @@
 'use strict';
 
 (function () {
-
-  var resetUserImages = window.images.reset;
-
   var ACTIVE_MAIN_MAP_PIN_HEIGHT = 84;
   var ENTER_KEY = window.util.ENTER_KEY;
   var MAP_TOP_COORDINATE = 130;
@@ -20,16 +17,19 @@
   var isPageActivated = false;
   var activateFormElements = window.util.activateFormElements;
   var disableFormElements = window.util.disableFormElements;
-  var mapLimits = {
-    right: map.offsetWidth - mainMapPin.offsetWidth / 2,
-    top: MAP_TOP_COORDINATE - ACTIVE_MAIN_MAP_PIN_HEIGHT,
-    left: MAP_LEFT_COORDINATE - mainMapPin.offsetWidth / 2,
-    bottom: MAP_BOTTOM_COORDINATE - ACTIVE_MAIN_MAP_PIN_HEIGHT,
-  };
   var removeMapCard = window.card.remove;
   var setupDragNDrop = window.dragNDrop.setupElement;
   var renderPins = window.pins.render;
   var removePins = window.pins.remove;
+
+  var getMapLimits = function () {
+    return {
+      right: map.offsetWidth - mainMapPin.offsetWidth / 2,
+      top: MAP_TOP_COORDINATE - ACTIVE_MAIN_MAP_PIN_HEIGHT,
+      left: MAP_LEFT_COORDINATE - mainMapPin.offsetWidth / 2,
+      bottom: MAP_BOTTOM_COORDINATE - ACTIVE_MAIN_MAP_PIN_HEIGHT,
+    };
+  };
 
   var setAdAddress = function () {
     var addressInput = adForm.querySelector('#address');
@@ -72,7 +72,6 @@
     mainMapPin.addEventListener('mousedown', mainMapPinLeftMouseDownHandler);
     adForm.reset();
     filterForm.reset();
-    resetUserImages();
     removeMapCard();
     removePins();
     mainMapPin.style.left = INACTIVE_MAIN_MAP_PIN_STYLES.LEFT;
@@ -81,7 +80,7 @@
   };
 
   deactivatePage();
-  setupDragNDrop(mainMapPin, mapLimits, setAdAddress);
+  setupDragNDrop(mainMapPin, getMapLimits, setAdAddress);
 
   window.map = {
     activatePage: activatePage,
