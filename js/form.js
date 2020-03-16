@@ -3,6 +3,7 @@
 (function () {
   var post = window.data.post;
   var deactivatePage = window.map.deactivatePage;
+  var resetFormImages = window.images.reset;
 
   var ESCAPE_KEY = window.util.ESCAPE_KEY;
 
@@ -129,6 +130,11 @@
   adFormReset.addEventListener('click', function (evt) {
     evt.preventDefault();
     deactivatePage();
+  });
+
+  adForm.addEventListener('reset', function () {
+    resetFormImages();
+    changePriceInput('flat');
   });
 
 })();
